@@ -1,0 +1,28 @@
+---
+permalink: /sections/
+title: Sections
+---
+
+<div id="sections">
+  {% for section in site.sections %}
+    <div class="sections-group">
+      {% capture section_name %} {{ section | first }}{% endcapture %}
+      <div id="#{{ section_name | slugize }}"></div>
+      <p></p>
+
+      <h3 class="section-head">{{ section_name }}</h3>
+      <a name="{{ section_name | slugize }}"></a>
+      {% for post in site.sections[section_name] %}
+      <article class="section-item">
+        <h4><a href="{{ site.baseurl }} {{ post.url }}">{{ post.title }}</a></h4>
+      </article>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+<div id="section-list">
+	{% for post in site.categories.LateralMovement %}
+	 <li><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</div>

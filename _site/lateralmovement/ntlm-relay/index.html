@@ -26,7 +26,7 @@
 	
 	
 		
-	<a href="/tools/" class=" active">Tools</a>
+	<a href="/tools/" class="">Tools</a>
 	
 	
 		
@@ -49,10 +49,29 @@
 		</header>
 		<section class="content">
 			<div class="wrapper">
-				
+				<div class="post">
 
-<h2>Tools <span class="count">(0)</span></h2>
+  <header class="post-header">
+    <h1 class="post-title">NTLM Relay Techniques</h1>
+    <p class="post-meta">Apr 24, 2019</p>
+  </header>
 
+  <article class="post-content">
+    <p>A number of systems within an environment allow for Kerberos authentication to occur within an AD environment, which can be leveraged to escalate privileged and move laterally across a network. The idea is to force a service which runs as a privileged domain user to connect back to an attacker controlled SMB server, where the NTLMv2 hash can be relayed onto another machine where the domain user running the service has privileges. The following is documentation which describes different examples of how this technique could be leveraged.</p>
+
+<h3 id="oracle-ntlmv2-relaying">Oracle NTLMv2 Relaying</h3>
+
+<h3 id="ms-sql-ntlmv2-relaying">MS-SQL NTLMv2 Relaying</h3>
+<p>If the SQL server instance permits authentication with a user that has the ability to perform XP type commands such as xp_dirtree, it is possible to capture the NTLMv2 of the domain user running the MSSQL service. The following describes this technique:</p>
+
+<p>XREF</p>
+
+<h3 id="management-interfaces">Management Interfaces</h3>
+<p>Any type of mangement system which can be accessed, for example by a web interface could be leveraged, as these systems typically require high privileged to perform actions such as updates across systems within an environment, and can also be leveraged to relay an NTLMv2 hash.</p>
+
+  </article>
+
+</div>
 
 			</div>
 		</section>

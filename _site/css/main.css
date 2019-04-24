@@ -126,6 +126,9 @@ header {
 #search-query {
   font-weight: bold; }
 
+section-list {
+  padding: 50px; }
+
 /**
  * Reset some basic elements
  */
@@ -285,6 +288,10 @@ pre {
 /**
  * Site header
  */
+.logo img {
+  height: 60px;
+  width: 60px; }
+
 .site-header {
   margin-top: 2%;
   min-height: 56px;

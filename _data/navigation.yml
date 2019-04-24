@@ -1,4 +1,6 @@
 - name: KB
-  link: /
+  link: /sections
 - name: Tools
   link: /tools/
+- name: Infrastructure
+  link: /inf/

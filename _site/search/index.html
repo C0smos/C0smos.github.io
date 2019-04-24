@@ -6,12 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="/css/main.css">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" href="/touch-icon.png" sizes="192x192">
-		<link rel="icon" type="image/png" href="/images/favicon.png">
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400italic,400,300italic,300,700,700italic|Open+Sans:400italic,600italic,700italic,700,600,400|Inconsolata:400,700">
-
-		
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	</head>
@@ -20,23 +14,29 @@
 		<header>
 			<div class="wrapper">
 				<section class="top-bar">
-					<div class="logo"><a href="/"></a></div>
+					<div class="logo">
+					  <a href="http://localhost:4000"><img src="/profile_logo.png"></a>
+					</div>
 					<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
 <nav>
 	
 	
 		
-	<a href="/" class="">KB</a>
+	<a href="/sections" class="">KB</a>
 	
 	
 		
 	<a href="/tools/" class="">Tools</a>
 	
+	
+		
+	<a href="/inf/" class="">Infrastructure</a>
+	
 </nav>
 
 				</section>
 				<section class="hero_search">
-					<h1>kb.wesrenshaw.com</h1>
+					<h1>kbwesrenshaw.com</h1>
 					<p>Knowledge Base for Adversarial Simulations</p>
 					<form action="/search/" method="get">
 	<input type="search" name="q"  placeholder="Search for KB articles..." autofocus>
@@ -58,6 +58,21 @@
 			
 				
 					
+					
+					"lateralmovement-ntlm-relay": {
+						"id": "lateralmovement-ntlm-relay",
+						"title": "NTLM Relay Techniques",
+						"categories": "LateralMovement",
+						"url": " /lateralmovement/ntlm-relay/",
+						"content": "A number of systems within an environment allow for Kerberos authentication to occur within an AD environment, which can be leveraged to escalate privileged and move laterally across a network. The idea is to force a service which runs as a privileged domain user to connect back to an attacker controlled SMB server, where the NTLMv2 hash can be relayed onto another machine where the domain user running the service has privileges. The following is documentation which describes different examples of how this technique could be leveraged.\n\nOracle NTLMv2 Relaying\n\nMS-SQL NTLMv2 Relaying\nIf the SQL server instance permits authentication with a user that has the ability to perform XP type commands such as xp_dirtree, it is possible to capture the NTLMv2 of the domain user running the MSSQL service. The following describes this technique:\n\nXREF\n\nManagement Interfaces\nAny type of mangement system which can be accessed, for example by a web interface could be leveraged, as these systems typically require high privileged to perform actions such as updates across systems within an environment, and can also be leveraged to relay an NTLMv2 hash."
+					}
+					
+				
+			
+		
+			
+				
+					,
 					
 					"ccsas-ccsas-theory": {
 						"id": "ccsas-ccsas-theory",
@@ -83,14 +98,13 @@
   <div class="wrapper">
 
       <div class="footer-col  footer-col-3">
-        <p class="text"></p>
       </div>
     </div>
 
   </div>
 
 <div class="copyright">
-<p>&copy; 2019 ~ <a href="http://localhost:4000">wesrenshaw.com</a></p>
+<p>&copy; 2019 ~ <a href="http://localhost:4000">www.kbwesrenshaw.com</a></p>
 
 </div>
 

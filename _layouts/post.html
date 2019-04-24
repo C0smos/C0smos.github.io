@@ -2,90 +2,15 @@
 layout: default
 ---
 
-<section class="kb">
-	<section class="sidebar sticky">
-		<ul>
-			{% assign sub_navigation = content | extract_element: 'h2' %}
-			{% for item in sub_navigation %}
-				<li><a href="#{{ item.id }}">{{ item.text }}</a></li>
-			{% endfor %}
-		</ul>
-	</section>
-	<section class="kb-content">
-		<h1>{{ page.title }}</h1>
+<div class="post">
 
-			{% if page.resources %}
-				<div class="kb-resources">
-					<ul>
-						{% for resource in page.resources %}
-							<li><a href="{{ resource.link }}">{{ resource.name }}</a></li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endif %}
-		
-	</section>
-</section>
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+  </header>
 
-{% if page.set %}
-	{% assign set_file_name = "_sets/" | append: page.set | append: ".md" %}
-	{% assign set = site.sets | where: "path", set_file_name | first %}
-	{% assign series_posts = site.posts | where: "set", page.set %}
-	<div class="kb-posts">
-		<h3>{{ set.title }} - Series</h3>
-		<p>{{ set.description }}</p>
+  <article class="post-content">
+    {{ content }}
+  </article>
 
-		{% include listings.html listings=series_posts numbered=true%}
-	</div>
-{% endif %}
-{% assign related_posts = site.related_posts %}
-{% assign related_posts_size = related_posts | size %}
-{% if related_posts_size > 0 %}
-	<div class="related">
-		<h3>Related kbs</h3>
-
-		{% include listings.html listings=site.related_posts %}
-	</div>
-{% endif %}
-
-
-<script src="{{ site.baseurl }}/js/main.js"></script>
-
-<script>
-	var headings = document.querySelectorAll("h2[id]");
-
-	console.log(headings);
-	for (var i = 0; i < headings.length; i++) {
-		var anchorLink = document.createElement("a");
-		anchorLink.innerText = "#";
-		anchorLink.href = "#" + headings[i].id;
-		anchorLink.classList.add("header-link");
-
-		headings[i].appendChild(anchorLink);
-	}
-
-	$(".modalOpen").click(function() {
-		var id = $(this).attr("href");
-		$(id).addClass("show");
-
-		$(window).click(function() {
-			$(".show").removeClass("show");
-		});
-
-		$(id + " > div").click(function(event){
-			event.stopPropagation();
-		});
-		return false;
-	});
-
-	$(".close").click(function() {
-		$(".show").removeClass("show");
-		return false;
-	});
-
-	$(document).keyup(function(e) {
-		if (e.keyCode == 27) {
-			$(".show").removeClass("show");
-		}
-	});
-</script>
+</div>

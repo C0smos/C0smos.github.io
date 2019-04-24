@@ -1,0 +1,6 @@
+---
+---
+{% assign tools = site.posts | where: "type", "Tool" | sort: "title" %}
+
+<h2>Tools <span class="count">({{ tools | size }})</span></h2>
+

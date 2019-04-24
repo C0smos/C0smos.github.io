@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/touch-icon.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="/images/favicon.png">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400italic,400,300italic,300,700,700italic|Open+Sans:400italic,600italic,700italic,700,600,400|Inconsolata:400,700">
+
+		
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+
+	<body class="">
+		<header>
+			<div class="wrapper">
+				<section class="top-bar">
+					<div class="logo"><a href="/"></a></div>
+					<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
+<nav>
+	
+	
+		
+	<a href="/" class="">KB</a>
+	
+	
+		
+	<a href="/tools/" class="">Tools</a>
+	
+</nav>
+
+				</section>
+				<section class="hero_search">
+					<h1>kb.wesrenshaw.com</h1>
+					<p>Knowledge Base for Adversarial Simulations</p>
+					<form action="/search/" method="get">
+	<input type="search" name="q"  placeholder="Search for KB articles..." autofocus>
+	<input type="submit" value="Search" style="display: none;">
+</form>
+
+				</section>
+			</div>
+
+		</header>
+		<section class="content">
+			<div class="wrapper">
+				<p><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></p>
+<ul id="search-results"></ul>
+
+<script>
+	window.data = {
+		
+			
+				
+					
+					
+					"ccsas-ccsas-theory": {
+						"id": "ccsas-ccsas-theory",
+						"title": "CCSAS Theory Notes",
+						"categories": "ccsas",
+						"url": " /ccsas/ccsas-theory/",
+						"content": "Cyber Warfare Terminology\n\nWebsite Seeding and Watering Hole Attacks"
+					}
+					
+				
+			
+		
+	};
+</script>
+<script src="/js/lunr.min.js"></script>
+<script src="/js/search.js"></script>
+
+			</div>
+		</section>
+
+		<footer class="site-footer">
+
+  <div class="wrapper">
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+<div class="copyright">
+<p>&copy; 2019 ~ <a href="http://localhost:4000">wesrenshaw.com</a></p>
+
+</div>
+
+</footer>
+
+		<script>
+			$(function() {
+				$('a[href*=\\#]').not(".no-smooth").on('click', function(event){
+					var el = $(this.hash);
+					if (el.length > 0) {
+						// event.preventDefault();
+						$('html,body').animate({scrollTop:$(this.hash).offset().top - 50}, 500);
+					}
+				});
+
+				$('svg').click(function() {
+					$(this).parent('form').submit();
+				});
+			});
+
+			document.getElementById("open-nav").addEventListener("click", function (event) {
+				event.preventDefault();
+				document.body.classList.toggle("nav-open");
+			});
+		</script>
+	</body>
+</html>

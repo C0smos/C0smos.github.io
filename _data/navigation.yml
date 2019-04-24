@@ -1,6 +1,4 @@
-- name: Tutorials
+- name: KB
   link: /
-- name: Videos
-  link: /videos/
-- name: FAQ
-  link: /faq/
+- name: Tools
+  link: /

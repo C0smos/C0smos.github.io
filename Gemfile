@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'jekyll'
+gem 'kramdown'
+gem 'sassc'
+gem 'github-pages'
 
 group :jekyll_plugins do
 #  gem 'jekyll-archives', '2.1.1'

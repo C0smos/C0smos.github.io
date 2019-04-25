@@ -1,5 +1,21 @@
-section-list {
-	padding: 50px
+.section-title {
+	text-align: center;
+	flex: 0 0 100%;
+	padding: 60px 0 30px 0;
+	}
 
+	h1 {
+		font-size: 2.4em;
+		color: #fff;
+	}
 
+.section-body {
+	h3 {
+		font-size: 1.2em;
+	}
+
+	li {
+		padding-top: 10px;
+		padding-bottom: 25px;
+	}
 }

@@ -1,14 +1,6 @@
-# ----
-# Site
-
 title: Base
 url: "https://www.kbwesrenshaw.com"
 baseurl:
-
-# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-logo: 
-# -----
-# Build
 
 timezone: Etc/UTC
 
@@ -36,4 +28,3 @@ defaults:
       path: "index.html"
     values:
       body_class: "show_hero_search"
-

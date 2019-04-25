@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png">	
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+
+	<body class="">
+		<header>
+			<div class="wrapper">
+				<section class="top-bar">
+					<div class="logo">
+					  <a href="http://localhost:4000"><img src="/profile_logo.png"></a>
+					</div>
+					<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
+<nav>
+	
+	
+		
+	<a href="/sections" class="">KB</a>
+	
+	
+		
+	<a href="/tools/" class="">Tools</a>
+	
+	
+		
+	<a href="/infrastructure/" class="">Infrastructure</a>
+	
+</nav>
+
+				</section>
+				<section class="hero_search">
+					<h1>Knowledge Base</h1>
+					<p>Offensive Security and Adversarial Simulation Notes</p>
+					<form action="/search/" method="get">
+	<input type="search" name="q"  placeholder="Search for KB articles..." autofocus>
+	<input type="submit" value="Search" style="display: none;">
+</form>
+
+				</section>
+			</div>
+
+		</header>
+		<section class="content">
+			<div class="wrapper">
+				<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Protecting C2 Implants</h1>
+    <p class="post-meta">Apr 25, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="c2-design-decisions">C2 Design Decisions</h2>
+
+<h3 id="implants">Implants</h3>
+<p>A number of mechanisms exist to ensure that C2 implants are safe and behave in a secure manner to ensure that client environments are protected. The following lists and describes common mechanisms found in C2 implants:</p>
+
+<h4 id="kill-switches">Kill Switches</h4>
+
+<p>Kill switches can be used to instruct when the C2 implant should desctruct and uninstall itself from the system. It is particularly useful to incorporate this into implants to ensure that the implant is not active outside of client engagement testing windows. Additionally, having the ability to remotely kill the implant is useful, if for instance the engagement needs to be stopped for a particular reason.</p>
+
+<h4 id="target-checks">Target Checks</h4>
+
+<p>To avoid the implant executing outside of the defined target a number of questions should be satisfied prior to execution. For instance, whether the particular host is joined to the relevant domain i.e. lab.local. Or whether the host shouldn’t be domain joined. Adding checks to ensure that the payload executes against the correct logged in user and that the host is running the specific type of expected operating system can also assist with ensuring that implants execute against in-scope targets.</p>
+
+<h4 id="implant-secure-coding">Implant Secure Coding</h4>
+
+<p>Implants should be written in memory safe languages such as C# to avoid introducing vulnerabilities into the target host which could be exploited by other attackers. Implants should also avoid logic and misconfiguration vulnerabilities such as implants which may run as services configured with insecure file permissions.</p>
+
+<h4 id="implant-communication-and-keying">Implant Communication and Keying</h4>
+
+<p>Implants should always communicate over a secure and encrypted channel when sensitive information is being extracted from the target environment (depending on the type of simulation). Implants can also be designed to only communicate back to specific attacker controlled infrastructure where implant communications can be controlled using URL rewriting and firewall rules. Key derivation functions can be leveraged to ensure that implants are protected by encrypting the implant and using resources such as environment variables or Active Directory properties in order to create the decryption key. It is also possible to use resources remotely, which can be controlled by an attacker and as such allows for greater controlled of when the implant executes or not.</p>
+
+  </article>
+
+</div>
+
+			</div>
+		</section>
+
+		<footer class="site-footer">
+
+  <div class="wrapper">
+
+      <div class="footer-col  footer-col-3">
+      </div>
+    </div>
+
+  </div>
+
+<div class="copyright">
+<p>&copy; 2019 ~ <a href="http://localhost:4000">www.kbwesrenshaw.com</a></p>
+
+</div>
+
+</footer>
+
+		<script>
+			$(function() {
+				$('a[href*=\\#]').not(".no-smooth").on('click', function(event){
+					var el = $(this.hash);
+					if (el.length > 0) {
+						// event.preventDefault();
+						$('html,body').animate({scrollTop:$(this.hash).offset().top - 50}, 500);
+					}
+				});
+
+				$('svg').click(function() {
+					$(this).parent('form').submit();
+				});
+			});
+
+			document.getElementById("open-nav").addEventListener("click", function (event) {
+				event.preventDefault();
+				document.body.classList.toggle("nav-open");
+			});
+		</script>
+	</body>
+</html>

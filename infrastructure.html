@@ -1,13 +1,13 @@
 ---
-permalink: /Tools/
-title: Tools
+permalink: /Infrastructure/
+title: Infrastructure
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
 
 <section class="section-title">
-<h1>Tooling</h1>
-<p>Notes on the development of offensive tooling</p>
+<h1>Infrastructure Notes</h1>
+<p>Notes on Infrastructure and C2 designs</p>
 </section>
 
 <div id="sections">
@@ -30,7 +30,16 @@ title: Tools
 
 <div class="section-body">
 	<div id="section-list">
-		{% for post in site.categories.tools %}
+	  <h3>C2 Designs</h3>
+		{% for post in site.categories.C2 %}
 		 <li><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
 		{% endfor %}
   </div>
+  
+<div class="section-body">
+	<div id="section-list">
+	  <h3>Infrastructure Designs</h3>
+		{% for post in site.categories.inf %}
+		 <li><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
+		{% endfor %}
+	</div>

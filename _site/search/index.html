@@ -30,7 +30,7 @@
 	
 	
 		
-	<a href="/inf/" class="">Infrastructure</a>
+	<a href="/infrastructure/" class="">Infrastructure</a>
 	
 </nav>
 
@@ -58,6 +58,36 @@
 			
 				
 					
+					
+					"c2-protecting-c2-implant": {
+						"id": "c2-protecting-c2-implant",
+						"title": "Protecting C2 Implants",
+						"categories": "C2",
+						"url": " /c2/protecting-c2-implant/",
+						"content": "C2 Design Decisions\n\nImplants\nA number of mechanisms exist to ensure that C2 implants are safe and behave in a secure manner to ensure that client environments are protected. The following lists and describes common mechanisms found in C2 implants:\n\nKill Switches\n\nKill switches can be used to instruct when the C2 implant should desctruct and uninstall itself from the system. It is particularly useful to incorporate this into implants to ensure that the implant is not active outside of client engagement testing windows. Additionally, having the ability to remotely kill the implant is useful, if for instance the engagement needs to be stopped for a particular reason.\n\nTarget Checks\n\nTo avoid the implant executing outside of the defined target a number of questions should be satisfied prior to execution. For instance, whether the particular host is joined to the relevant domain i.e. lab.local. Or whether the host shouldn’t be domain joined. Adding checks to ensure that the payload executes against the correct logged in user and that the host is running the specific type of expected operating system can also assist with ensuring that implants execute against in-scope targets.\n\nImplant Secure Coding\n\nImplants should be written in memory safe languages such as C# to avoid introducing vulnerabilities into the target host which could be exploited by other attackers. Implants should also avoid logic and misconfiguration vulnerabilities such as implants which may run as services configured with insecure file permissions.\n\nImplant Communication and Keying\n\nImplants should always communicate over a secure and encrypted channel when sensitive information is being extracted from the target environment (depending on the type of simulation). Implants can also be designed to only communicate back to specific attacker controlled infrastructure where implant communications can be controlled using URL rewriting and firewall rules. Key derivation functions can be leveraged to ensure that implants are protected by encrypting the implant and using resources such as environment variables or Active Directory properties in order to create the decryption key. It is also possible to use resources remotely, which can be controlled by an attacker and as such allows for greater controlled of when the implant executes or not."
+					}
+					
+				
+			
+		
+			
+				
+					,
+					
+					"initialcompromise-email-spoofing": {
+						"id": "initialcompromise-email-spoofing",
+						"title": "Email Spoofing Techniques",
+						"categories": "InitialCompromise",
+						"url": " /initialcompromise/email-spoofing/",
+						"content": "Email Spoofing\n\nSender Policy Framework (SPF)\n\nDomainKeys Identified Mail (DKIM)\n\nDomain Message Authentication Reporting and Conformance (DMARC)"
+					}
+					
+				
+			
+		
+			
+				
+					,
 					
 					"persistence-persistence": {
 						"id": "persistence-persistence",
@@ -91,7 +121,7 @@
 					
 					"initialcompromise-evasion": {
 						"id": "initialcompromise-evasion",
-						"title": "Initial Foothold Techniques",
+						"title": "Initial Foothold and EDR Bypass Techniques",
 						"categories": "InitialCompromise",
 						"url": " /initialcompromise/evasion/",
 						"content": "Bypassing EDR Solutions\n\nCylance\n\nWindows Defender"
@@ -109,7 +139,7 @@
 						"title": "CCSAS Theory Notes",
 						"categories": "ccsas",
 						"url": " /ccsas/ccsas-theory/",
-						"content": "Cyber Warfare Terminology\n\nWebsite Seeding and Watering Hole Attacks"
+						"content": "Cyber Warfare Terminology\n\nInfecting Targets\n\n\n  Direct\n  Indirect\n\n\nExploit Kits\nExploit kits can be leveraged to exploit vulnerable software such as browsers. Exploit kits can enumerated vulnerable components within the browser prior to exploitation to ensure a greater success rate. These browser exploit kits will exploit vulnerable componenents such as plugins in order to facilitate a drive-by download attack.\n\nWebsite Seeding and Watering Hole Attacks\nProviding an attacker with the ability to install malicious programs on the victim’s system. Behavioral understanding of the target is important to determine the success of watering hole attacks. By understanding a targets browsing habits, websites can be targeted and exploited to stage malicious software.\n\nThe general concept of waterholing is when websites in which the target often frequents will be leveraged to include malicious code which will perform a drive-by download attack (code to load the browser exploit pack) in order to download malware onto the target’s system through vulnerabilities in the browser.\n\nThe injected code could be loaded from the attacker’s server and redirect the victim’s browser to a malicious domain which attempts to exploit the end user’s system.\n\nUSB Infections\nUSBs can be leveraged to exploit targets such as those not connected to the internet. In order to automatically run the malware on the USB as soon as the USB is inserted, an autorun.inf file is created which called the malicious program on the USB itself.\n\nDefinitions"
 					}
 					
 				

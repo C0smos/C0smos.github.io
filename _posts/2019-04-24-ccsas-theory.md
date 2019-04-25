@@ -2,12 +2,27 @@
 date: 2019-04-24
 title: CCSAS Theory Notes
 description: Theory notes on ccsas exam
-categories:
-  - ccsas
-type: KB
+categories: ccsas
 ---
 
 ## Cyber Warfare Terminology
 
-### Website Seeding and Watering Hole Attacks
+### Infecting Targets
 
+- Direct 
+- Indirect
+
+#### Exploit Kits
+Exploit kits can be leveraged to exploit vulnerable software such as browsers. Exploit kits can enumerated vulnerable components within the browser prior to exploitation to ensure a greater success rate. These browser exploit kits will exploit vulnerable componenents such as plugins in order to facilitate a drive-by download attack. 
+
+#### Website Seeding and Watering Hole Attacks
+Providing an attacker with the ability to install malicious programs on the victim's system. Behavioral understanding of the target is important to determine the success of watering hole attacks. By understanding a targets browsing habits, websites can be targeted and exploited to stage malicious software.
+
+The general concept of waterholing is when websites in which the target often frequents will be leveraged to include malicious code which will perform a drive-by download attack (code to load the browser exploit pack) in order to download malware onto the target's system through vulnerabilities in the browser.
+
+The injected code could be loaded from the attacker's server and redirect the victim's browser to a malicious domain which attempts to exploit the end user's system.
+
+#### USB Infections
+USBs can be leveraged to exploit targets such as those not connected to the internet. In order to automatically run the malware on the USB as soon as the USB is inserted, an autorun.inf file is created which called the malicious program on the USB itself.  
+
+### Definitions

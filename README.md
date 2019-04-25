@@ -1,2 +1,2 @@
-# kb.wesrenshaw.com
-Knowledge base
+# www.kbwesrenshaw.com
+Website for Knowledge base and notes

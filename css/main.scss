@@ -4,6 +4,7 @@
 @import "header";
 @import "search";
 @import "kb";
+@import "syntax";
 
 
 // Our variables
@@ -51,7 +52,6 @@ $on-laptop:        800px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
-        "layout",
-        "_syntax-highlighting"
+        "layout"
 ;
 

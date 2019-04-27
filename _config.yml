@@ -28,3 +28,6 @@ defaults:
       path: "index.html"
     values:
       body_class: "show_hero_search"
+
+markdown: kramdown
+highlighter: rouge

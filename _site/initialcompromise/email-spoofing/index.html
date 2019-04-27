@@ -26,11 +26,11 @@
 	
 	
 		
-	<a href="/tools/" class="">Tools</a>
+	<a href="/tools" class="">Tools</a>
 	
 	
 		
-	<a href="/infrastructure/" class="">Infrastructure</a>
+	<a href="/infrastructure" class="">Infrastructure</a>
 	
 </nav>
 
@@ -58,12 +58,100 @@
 
   <article class="post-content">
     <h2 id="email-spoofing">Email Spoofing</h2>
+<p>Initial compromises typically result from phishing campaigns where a subset of users are targeted through the use of email and engineered into performing actions on behalf of an attacker, for instance by running some malicious code unknowingly. For these types of attacks to be successful an attacker would usually attempt to forge an email which appears to come from a legitimate source such as another employee by spoofing the “header-from” email header and using company email signatures.</p>
 
-<h3 id="sender-policy-framework-spf">Sender Policy Framework (SPF)</h3>
+<h3 id="email-spoofing-using-smtp">Email Spoofing using SMTP</h3>
+<p>The following shows an example of how to use netcat to send a spoofed email to a specific target:</p>
 
-<h3 id="domainkeys-identified-mail-dkim">DomainKeys Identified Mail (DKIM)</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MAIL FROM:&lt;realadmin@mx01.lab.local&gt;
+250 2.1.0 Ok
+RCPT TO:&lt;wes@mx01.lab.local&gt;
+250 2.1.5 Ok
+DATA
+354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+From: [Actual Admin] &lt;attacker@example.com&gt;
+To: [Wes IT] &lt;wes@mx01.lab.local&gt;
+Date: Sat, 27 Apr 2019 15:11
+Subject: Phishing training
 
-<h3 id="domain-message-authentication-reporting-and-conformance-dmarc">Domain Message Authentication Reporting and Conformance (DMARC)</h3>
+Hi Wes, hope you're well, please find below the URL containing the phishing training material for this afternoon:
+
+www.wesrenshaw.com/phishing.html
+
+Any questions, let me know,
+
+Admin
+</code></pre></div></div>
+
+<h2 id="sender-policy-framework-spf">Sender Policy Framework (SPF)</h2>
+<p>SPF is used to check that emails are sent from the specified mail server by performing validations against the envelope-from address where the address value comes from the domain’s DNS TXT record. The following SPF record would only permit email which comes from the mail server at “172.16.0.2”:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mx01.lab.local.		604800	IN	TXT	"v=spf1 ipv4:172.16.0.2 -all"
+</code></pre></div></div>
+
+<p>All other email sent from outside this host would be rejected. A soft fail can be configured where email is still recieved however it is then marked as spam:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mx01.lab.local.		604800	IN	TXT	"v=spf1 ipv4:172.16.0.2 ~all"
+</code></pre></div></div>
+
+<p>As SPF only verifies the envelope sender (MAIL FROM) address and not the header-from address.</p>
+
+<p>SPF logs from postfix:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr 27 14:26:37 mx01 policyd-spf[13798]: prepend Received-SPF: None (mailfrom) identity=mailfrom; client-ip=172.16.0.10; helo=mx01.lab.local; envelope-from=admin@mx01.lab.local; receiver=&lt;UNKNOWN&gt;
+</code></pre></div></div>
+
+<p>Emails which trigger the SPF record, will contain the following email header:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Return-Path: &lt;attacker@example.com&gt;
+X-Original-To: wes@mx01.lab.local
+Delivered-To: wes@mx01.lab.local
+Received-SPF: Fail (mailfrom) identity=mailfrom; client-ip=172.16.0.10; helo=example.com; envelope-from=attacker@example.com; receiver=&lt;UNKNOWN&gt;
+Received: from unknown (unknown [172.16.0.10])
+        by mx01.lab.local (Postfix) with SMTP id 5E93F204B8
+        for &lt;wes@mx01.lab.local&gt;; Sat, 27 Apr 2019 15:30:49 +0100 (BST)
+X-Mailbox-Line: From [IT Admin]&lt;itadmin@mx01.lab.local&gt;
+
+To [Wes]&lt;wes@mx01.lab.local&gt;
+Subject Phishing Training
+
+Hi Wes, hope you're well, please find below the URL containing the phishing training material for this afternoon:
+
+www.wesrenshaw.com/phishing.html
+
+Any questions, let me know
+
+IT Admin
+</code></pre></div></div>
+
+<p>When SPF checks actually pass, the following header will exist, permitting email from being recieved to the target:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Return-Path: &lt;admin@mx01.lab.local&gt;
+X-Original-To: wes@mx01.lab.local
+Delivered-To: wes@mx01.lab.local
+Received-SPF: None (mailfrom) identity=mailfrom; client-ip=172.16.0.10; helo=mx01.lab.local; envelope-from=admin@mx01.lab.local; receiver=&lt;UNKNOWN&gt;
+Received: from unknown (unknown [172.16.0.10])
+        by mx01.lab.local (Postfix) with SMTP id 08B25204B8
+        for &lt;wes@mx01.lab.local&gt;; Sat, 27 Apr 2019 15:46:21 +0100 (BST)
+X-Mailbox-Line: From [IT Admin]&lt;admin@mx01.lab.local&gt;
+
+To [Wes]&lt;wes@mx01.lab.local&gt;
+Subject: Phishing
+
+Please watch these phishing video trainings,
+
+Thanks
+</code></pre></div></div>
+
+<p>However as the attacker doesn’t actually have access to the mailbox at “admin@mx01.lab.local”, they won’t recieve any emails.</p>
+
+<p>SPF can be bypassed by setting up a domain which has valid SPF records associated where emails are sent from the domain. SPF alone does not provide any means to prevent spoofing.</p>
+
+<h2 id="sender-id">Sender ID</h2>
+
+<h2 id="domainkeys-identified-mail-dkim">DomainKeys Identified Mail (DKIM)</h2>
+
+<h2 id="domain-message-authentication-reporting-and-conformance-dmarc">Domain Message Authentication Reporting and Conformance (DMARC)</h2>
 
   </article>
 

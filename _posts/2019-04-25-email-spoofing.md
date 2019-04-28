@@ -105,4 +105,5 @@ SPF can be bypassed by setting up a domain which has valid SPF records associate
 
 ## DomainKeys Identified Mail (DKIM)
 
+
 ## Domain Message Authentication Reporting and Conformance (DMARC)

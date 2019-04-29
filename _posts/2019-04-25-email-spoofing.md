@@ -101,9 +101,26 @@ However as the attacker doesn't actually have access to the mailbox at "admin@mx
 
 SPF can be bypassed by setting up a domain which has valid SPF records associated where emails are sent from the domain. SPF alone does not provide any means to prevent spoofing.
 
-## Sender ID
+The targeted mail server will check the recipients email against the mail server which sent it to verify that the email is in fact coming from a destination specified in the recipients DNS TXT record.
 
 ## DomainKeys Identified Mail (DKIM)
-
+DKIM protects email from being altered in transit, whereas SPF does not. DKIM checks the message header and not the SMTP headers, allowing for messages to be forwarded by mail servers reliably.
 
 ## Domain Message Authentication Reporting and Conformance (DMARC)
+DMARC is used to verify that both SPF and DKIM are configured, in order to protect against email spoofing. Domain owners and recipient mail servers need to use DMARC in order for DMARC to be used. DMARC can be used to ensure that the from header domain matches the "MAIL FROM" and DKIM d tag domain to protect against spoofing. An example DMARC record is shown below:
+
+```
+XREF
+
+```
+
+The following DMARC policies exist:
+* None
+* Quarantine
+* Reject
+
+Authentication-Results header (dkim, spf then dmarc)
+
+DMARC report types:
+* Aggregate (rua)
+* Failure/Forensic (ruf)

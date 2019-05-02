@@ -155,8 +155,8 @@ Thanks
 <h2 id="domain-message-authentication-reporting-and-conformance-dmarc">Domain Message Authentication Reporting and Conformance (DMARC)</h2>
 <p>DMARC is used to verify that both SPF and DKIM are configured, in order to protect against email spoofing. Domain owners and recipient mail servers need to use DMARC in order for DMARC to be used. DMARC can be used to ensure that the from header domain matches the “MAIL FROM” and DKIM d tag domain to protect against spoofing. An example DMARC record is shown below:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>XREF
-
+<p><em>dig txt google._domainkey.ondmarc.com</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>google._domainkey.ondmarc.com. 300 IN	TXT	"v=DKIM1; k=rsa; p=[...]
 </code></pre></div></div>
 
 <p>The following DMARC policies exist:</p>

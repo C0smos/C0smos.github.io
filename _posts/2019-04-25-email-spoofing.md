@@ -8,6 +8,9 @@ categories: InitialCompromise
 ## Email Spoofing
 Initial compromises typically result from phishing campaigns where a subset of users are targeted through the use of email and engineered into performing actions on behalf of an attacker, for instance by running some malicious code unknowingly. For these types of attacks to be successful an attacker would usually attempt to forge an email which appears to come from a legitimate source such as another employee by spoofing the "header-from" email header and using company email signatures.
 
+### Email Server Identification
+XREF - Email headers
+
 ### Email Spoofing using SMTP
 The following shows an example of how to use netcat to send a spoofed email to a specific target:
 
@@ -31,6 +34,15 @@ Any questions, let me know,
 
 Admin
 ```
+
+### Email User Enumeration
+The following commands can be used to enumerate valid email users:
+
+* VRFY – Asks the mail server to confirm whether the given argument is a user or a mailbox.
+* EXPN – Asks the mail server to confirm whether the given argument identifies as a mailing list, and if so the mail server will return the membership of that list.
+* RCPT – This command is used to identify an individual recipient of the mail data.
+
+EXPN and VRFY return valid domain addresses which can be used by RCPT.
 
 ## Sender Policy Framework (SPF)
 SPF is used to check that emails are sent from the specified mail server by performing validations against the envelope-from address where the address value comes from the domain's DNS TXT record. The following SPF record would only permit email which comes from the mail server at "172.16.0.2":
@@ -109,9 +121,9 @@ DKIM protects email from being altered in transit, whereas SPF does not. DKIM ch
 ## Domain Message Authentication Reporting and Conformance (DMARC)
 DMARC is used to verify that both SPF and DKIM are configured, in order to protect against email spoofing. Domain owners and recipient mail servers need to use DMARC in order for DMARC to be used. DMARC can be used to ensure that the from header domain matches the "MAIL FROM" and DKIM d tag domain to protect against spoofing. An example DMARC record is shown below:
 
+*dig txt google._domainkey.ondmarc.com*
 ```
-XREF
-
+google._domainkey.ondmarc.com. 300 IN	TXT	"v=DKIM1; k=rsa; p=[...]
 ```
 
 The following DMARC policies exist:

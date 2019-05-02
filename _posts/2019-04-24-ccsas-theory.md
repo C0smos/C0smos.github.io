@@ -1,8 +1,8 @@
 ---
 date: 2019-04-24
-title: CCSAS Theory Notes
-description: Theory notes on ccsas exam
-categories: ccsas
+title: Targeted Exploitation
+description: Notes on targeted exploitation
+categories: misc
 ---
 
 ## Cyber Warfare Terminology

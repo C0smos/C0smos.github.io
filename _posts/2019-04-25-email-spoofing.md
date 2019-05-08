@@ -9,7 +9,17 @@ categories: InitialCompromise
 Initial compromises typically result from phishing campaigns where a subset of users are targeted through the use of email and engineered into performing actions on behalf of an attacker, for instance by running some malicious code unknowingly. For these types of attacks to be successful an attacker would usually attempt to forge an email which appears to come from a legitimate source such as another employee by spoofing the "header-from" email header and using company email signatures.
 
 ### Email Server Identification
-XREF - Email headers
+Various tools can be leveraged to determine the address of an internal email server:
+
+* Historical DNS data
+* Subdomain Enumeration
+* DNS TXT records
+
+### Email Server Configurations
+Local email servers should be configured to only accept email from the upstream security email gateway. It would be possible for attackers to send email directly to the local mail server if restrictions are not in place, allowing for security gateways to be bypassed.
+
+#### X-Originating-IP
+The X-Originating-IP email header is used to determine the IP addresses of clients which connect to mail server services, such as HTTPS frontends.
 
 ### Email Spoofing using SMTP
 The following shows an example of how to use netcat to send a spoofed email to a specific target:

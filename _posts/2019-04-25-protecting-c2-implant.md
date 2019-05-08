@@ -1,5 +1,5 @@
 ---
-date: 2019-04-25
+date: 2019-04-28
 title: Protecting C2 Implants
 description: Notes on how to create safe C2 implants
 categories: C2

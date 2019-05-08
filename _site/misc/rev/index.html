@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="shortcut icon" type="image/png" href="/favicon.png">	
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+
+	<body class="">
+		<header>
+			<div class="wrapper">
+				<section class="top-bar">
+					<div class="logo">
+					  <a href="http://localhost:4000"><img src="/profile_logo.png"></a>
+					</div>
+					<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
+<nav>
+	
+	
+		
+	<a href="/sections" class="">KB</a>
+	
+	
+		
+	<a href="/tools" class="">Tools</a>
+	
+	
+		
+	<a href="/infrastructure" class="">Infrastructure</a>
+	
+</nav>
+
+				</section>
+				<section class="hero_search">
+					<h1>Knowledge Base</h1>
+					<p>Offensive/Defensive Security and Adversarial Simulation Notes</p>
+					<form action="/search/" method="get">
+	<input type="search" name="q"  placeholder="Search for KB articles..." autofocus>
+	<input type="submit" value="Search" style="display: none;">
+</form>
+
+				</section>
+			</div>
+
+		</header>
+		<section class="content">
+			<div class="wrapper">
+				<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Notes for Revision</h1>
+    <p class="post-meta">Apr 24, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="client-side-exploitation">Client-Side Exploitation</h2>
+
+<h3 id="common-document-formats">Common Document Formats</h3>
+
+<h3 id="client-web-browsers">Client Web Browsers</h3>
+
+<h3 id="rich-content">Rich Content</h3>
+
+<h3 id="ms-operating-system-vulnerabilities">MS Operating System Vulnerabilities</h3>
+
+<h3 id="xss-vectors-for-intercepting-keystrokes-and-mouse-clicks">XSS Vectors for Intercepting Keystrokes and Mouse Clicks</h3>
+
+<h2 id="embedded-and-peripheral-devices">Embedded and Peripheral Devices</h2>
+
+<h3 id="identification-and-ezploitation-of-embedded-devices">Identification and Ezploitation of Embedded Devices</h3>
+
+<h3 id="identification-and-remote-control-of-peripheral-devices">Identification and Remote Control of Peripheral Devices</h3>
+
+<h3 id="key-logging">Key Logging</h3>
+
+<h2 id="implant-creation">Implant Creation</h2>
+
+<h3 id="design">Design</h3>
+
+<h3 id="win32">Win32</h3>
+
+<h3 id="vba-macro">VBA Macro</h3>
+
+<h3 id="windows-os-bootstrapping">Windows OS Bootstrapping</h3>
+
+<h3 id="usb-autorun">USB ‘AutoRun’</h3>
+
+<h3 id="physical-implants">Physical Implants</h3>
+<ul>
+  <li>Egress via 3G/4G and Wireless Access Points</li>
+</ul>
+
+<h2 id="evasion">Evasion</h2>
+
+<h3 id="av-evasion">AV Evasion</h3>
+
+<h3 id="disaleenable-av">Disale/Enable AV</h3>
+
+<h3 id="port-scanning">Port Scanning</h3>
+
+<h3 id="operating-system-defences">Operating System Defences</h3>
+
+<h3 id="perimeter-controls">Perimeter Controls</h3>
+
+<h3 id="ids-evasion">IDS Evasion</h3>
+
+<h2 id="egress-and-c2-communications">Egress and C2 Communications</h2>
+
+<h3 id="outbound-firewall-rules">Outbound Firewall Rules</h3>
+
+<h3 id="reverse-shells">Reverse Shells</h3>
+
+<h3 id="tunnelling">Tunnelling</h3>
+
+<h3 id="attack-source-obfuscation">Attack Source Obfuscation</h3>
+<ul>
+  <li>Domain Fronting</li>
+  <li>TTPs associated with threat actors from other counties</li>
+</ul>
+
+<h3 id="secure-egress">Secure Egress</h3>
+
+  </article>
+
+</div>
+
+			</div>
+		</section>
+
+		<footer class="site-footer">
+
+  <div class="wrapper">
+
+      <div class="footer-col  footer-col-3">
+      </div>
+    </div>
+
+  </div>
+
+<div class="copyright">
+<p>&copy; 2019 ~ <a href="http://localhost:4000">www.kbwesrenshaw.com</a></p>
+
+</div>
+
+</footer>
+
+		<script>
+			$(function() {
+				$('a[href*=\\#]').not(".no-smooth").on('click', function(event){
+					var el = $(this.hash);
+					if (el.length > 0) {
+						// event.preventDefault();
+						$('html,body').animate({scrollTop:$(this.hash).offset().top - 50}, 500);
+					}
+				});
+
+				$('svg').click(function() {
+					$(this).parent('form').submit();
+				});
+			});
+
+			document.getElementById("open-nav").addEventListener("click", function (event) {
+				event.preventDefault();
+				document.body.classList.toggle("nav-open");
+			});
+		</script>
+	</body>
+</html>

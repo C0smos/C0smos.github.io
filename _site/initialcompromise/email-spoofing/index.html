@@ -60,6 +60,21 @@
     <h2 id="email-spoofing">Email Spoofing</h2>
 <p>Initial compromises typically result from phishing campaigns where a subset of users are targeted through the use of email and engineered into performing actions on behalf of an attacker, for instance by running some malicious code unknowingly. For these types of attacks to be successful an attacker would usually attempt to forge an email which appears to come from a legitimate source such as another employee by spoofing the “header-from” email header and using company email signatures.</p>
 
+<h3 id="email-server-identification">Email Server Identification</h3>
+<p>Various tools can be leveraged to determine the address of an internal email server:</p>
+
+<ul>
+  <li>Historical DNS data</li>
+  <li>Subdomain Enumeration</li>
+  <li>DNS TXT records</li>
+</ul>
+
+<h3 id="email-server-configurations">Email Server Configurations</h3>
+<p>Local email servers should be configured to only accept email from the upstream security email gateway. It would be possible for attackers to send email directly to the local mail server if restrictions are not in place, allowing for security gateways to be bypassed.</p>
+
+<h4 id="x-originating-ip">X-Originating-IP</h4>
+<p>The X-Originating-IP email header is used to determine the IP addresses of clients which connect to mail server services, such as HTTPS frontends.</p>
+
 <h3 id="email-spoofing-using-smtp">Email Spoofing using SMTP</h3>
 <p>The following shows an example of how to use netcat to send a spoofed email to a specific target:</p>
 
@@ -82,6 +97,17 @@ Any questions, let me know,
 
 Admin
 </code></pre></div></div>
+
+<h3 id="email-user-enumeration">Email User Enumeration</h3>
+<p>The following commands can be used to enumerate valid email users:</p>
+
+<ul>
+  <li>VRFY – Asks the mail server to confirm whether the given argument is a user or a mailbox.</li>
+  <li>EXPN – Asks the mail server to confirm whether the given argument identifies as a mailing list, and if so the mail server will return the membership of that list.</li>
+  <li>RCPT – This command is used to identify an individual recipient of the mail data.</li>
+</ul>
+
+<p>EXPN and VRFY return valid domain addresses which can be used by RCPT.</p>
 
 <h2 id="sender-policy-framework-spf">Sender Policy Framework (SPF)</h2>
 <p>SPF is used to check that emails are sent from the specified mail server by performing validations against the envelope-from address where the address value comes from the domain’s DNS TXT record. The following SPF record would only permit email which comes from the mail server at “172.16.0.2”:</p>

@@ -53,13 +53,123 @@
 
   <header class="post-header">
     <h1 class="post-title">Notes for Revision</h1>
-    <p class="post-meta">Apr 24, 2019</p>
+    <p class="post-meta">May 7, 2019</p>
   </header>
 
   <article class="post-content">
-    <h2 id="client-side-exploitation">Client-Side Exploitation</h2>
+    <h2 id="core">Core</h2>
+
+<h3 id="network-access-control">Network Access Control</h3>
+<p>NACs need to detec whether new devices connect to the network, and whether they comply with a defined security policy.</p>
+
+<p>Mac address spoofing of a device such as a VoIP system, which does not have AV on, and would have to be whitelisted by its Mac address.</p>
+
+<ul>
+  <li>Mac Addresses (48 bits - first 6 digits (24 bits) are the manufacturer, the rightmost digits (24 bits), is the identification of the specific device)</li>
+  <li></li>
+</ul>
+
+<h3 id="wpa2-enterprise-misconfigurations">WPA2 Enterprise Misconfigurations</h3>
+<p>WPA-802.1X uses a supplicant, an authenticator and an authentication server - relies on EAP to transfer messages between the supplicant and authentication server, allowing for packet encapsulation. To capture client credentials a rogue RADIUS server is required and an access point. A valid certicate may also be required if clients are configured to check for valid certificates. Once a fake access point and rogue RADIUS server is configured, clients connected to the actual target network will need to connect to the fake network. In order to achieve this de-authentication packets are sent to these clients in order to force them to reconnect to the fake network and capture the challenge-response to perform offline dictionary based attacks.</p>
+
+<h3 id="whois-record-formats">WHOIS Record Formats</h3>
+<ul>
+  <li>Admin Name</li>
+  <li>Admin Email</li>
+  <li>Tech Name</li>
+  <li>Tech Email</li>
+</ul>
+
+<h3 id="dns">DNS</h3>
+<ul>
+  <li>Zone Tranfer
+<em>dig AXFR domain_example @nameserver</em></li>
+</ul>
+
+<p><em>nslookup</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server ns.example.com
+set type=any
+ls -d example.com
+</code></pre></div></div>
+<h2 id="client-side-exploitation">Client-Side Exploitation</h2>
 
 <h3 id="common-document-formats">Common Document Formats</h3>
+<h4 id="adobe-acrobat">Adobe Acrobat</h4>
+<p>It is possible to leverage embedded files within Adobe Reader to gain code execution via launch actions and embedded files, depending on Adobe’s file extension blacklist.</p>
+
+<h4 id="ms-office">MS Office</h4>
+<p>Achieving code execution through Office documents can be done in a number of ways, as discussed below:</p>
+
+<h4 id="macros">Macros</h4>
+<p>VBScripts can be used to invoke and run Windows OS commands such as PowerShell, to invoke a second stager. Although VBScripts can be obfuscated to evade static AV solutions, these techniques would typical create anomolies. These anomolies are easily detected by EDR products, for example Excel spawning a CMD child process. In order to evade these types of anomolies, it is possible to use other Windows technologies such as WMI or COM objects. XMLDOM can also be used to invoke the “load” method, to call an XML document from a remote location and execute its contents using “transformNode”, all within the Office process.</p>
+
+<ul>
+  <li>SLK files to evade the protected view prompt</li>
+  <li>Hiding Macros from the GUI
+    <ul>
+      <li>OLE Compound file?
+        <ul>
+          <li>Actual vba code is in a different stream to that of the GUI code - up to Office 2003</li>
+        </ul>
+      </li>
+      <li>Performance Cache includes P-Code</li>
+      <li>Office 2010 onwards uses VBA7 Stack Machine (compressed source code can be nulled)</li>
+      <li>if exact version of word/excel in use is known then p-code will execute and source code can be nulled</li>
+      <li>Develop malicious document into x64 and x86 (bytes 3 and 4 and make sure version matches version number of victim) FleshHex</li>
+    </ul>
+  </li>
+  <li>docx files can’t be macros - docm - Macro smuggling</li>
+  <li>Word allows for .dot files to be renamed to another extension i.e. html (Inject HTML code into the Word document)</li>
+  <li>Leverage HTML smuggling to link both word document and html word template together
+    <ul>
+      <li>HTML smuggling typically used to bypass proxies</li>
+    </ul>
+  </li>
+  <li>Trusted Locations in Word configured for documents on a specific network share for example</li>
+</ul>
+
+<p>Invoke-Templator - update references from all documents to template payload - combine this with Responder</p>
+
+<ul>
+  <li>
+    <p>slk files - Protected view doesn’t trigger - weaponised using dde (slk is text based, as such won’t be opened in protected view sandbox) - XML macros</p>
+
+    <ul>
+      <li>XML Macros 4.0 is contained within the normal worksheet</li>
+    </ul>
+  </li>
+  <li>AMSI integrates with VBA engine on Office 365 apps Windows 10
+    <ul>
+      <li>All COM and Win32 API calls which come from the VBA engine are logged</li>
+    </ul>
+  </li>
+  <li>
+    <p>Excel 4.0 docs are not VBA</p>
+  </li>
+  <li>
+    <p>Compound file binary format (file system within a single file) - up to 2007 mostly
+_VBA_PROJECT steam contains the VBA engine which will run the macro</p>
+  </li>
+  <li>Abuse ambiguity in the specs</li>
+  <li>Explore undocumented features
+    <ul>
+      <li>Must be ignored, must not be present</li>
+    </ul>
+  </li>
+  <li>Deviate from the specs</li>
+</ul>
+
+<p>Add documents to registry to ensure document is trusted - this will be a URL pointing to malicious document</p>
+
+<p>Evade AMSI using methods which have no trigger event in AMSI - WMI spawninstance</p>
+
+<p>A few ideas to bypass EDR solutions:
+    - Leverage the Excel 4 Macro from SharpShooter and use different WinAPI calls which don’t get hooked by EDR solutions i.e. avoid createremotethread etc
+        - Use Shellcode generated from the Donut project which takes a normal .NET assembly i.e. dll from a C2 project, such as Cobalt</p>
+
+<p>Malicious template which is hosted remotely (webDAV for SMB), and then reference from a normal word document</p>
+
+<p>Macroless -&gt; DDEAUTO</p>
 
 <h3 id="client-web-browsers">Client Web Browsers</h3>
 
@@ -88,19 +198,43 @@
 <h3 id="windows-os-bootstrapping">Windows OS Bootstrapping</h3>
 
 <h3 id="usb-autorun">USB ‘AutoRun’</h3>
+<p>From Windows 7 AutoRun no longer works with USBs</p>
 
 <h3 id="physical-implants">Physical Implants</h3>
 <ul>
   <li>Egress via 3G/4G and Wireless Access Points</li>
+  <li>SMS payloads via GPRS as opposed to relying on 3G/4G</li>
 </ul>
 
 <h2 id="evasion">Evasion</h2>
 
 <h3 id="av-evasion">AV Evasion</h3>
+<p>Typical AV solutions deploy statistical based detection mechanisms based on common signatures such as file hashes and sequences of bytes. AV solutions can also perform emulation, for example sandboxing, heuristic and dynamic analysis. Sandboxing can also be deployed to run payloads in order to inspect them for potentially malicious actions and anomolies.</p>
+
+<h4 id="packing">Packing</h4>
+<p>Compressing or encrypting the executable is used to alter the signatures in an attempt to evade signature based AV solutions. It is common for decompression or decryption to happen in memory, and AV solutions commonly employ built-in unpacking routines. Custom packing tools can be developed to ensure that artifacts are not known to AV solutions.</p>
+
+<h4 id="encoding-and-obfuscation">Encoding and Obfuscation</h4>
+<p>Similar to packing, encoding and obfuscation techniques can be used to evade signature based AV detections.</p>
+
+<h4 id="recompiling">Recompiling</h4>
 
 <h3 id="disaleenable-av">Disale/Enable AV</h3>
+<p>Within Windows, whilst running within the context of an administrator disabling Windows Defender can be achieved using the following methods:</p>
+
+<ul>
+  <li>Group Policy (Computer Configuration &gt; Administrative Templates &gt; Windows Components &gt; Windows Defender Antivirus)</li>
+  <li>Registry Setting (HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender) with the DWORD key “DisableAntiSpyware” value to 1</li>
+</ul>
 
 <h3 id="port-scanning">Port Scanning</h3>
+<p>Obfuscation techniques can be used to evade IDS technologies which involve session splicing and fragmentation.</p>
+
+<p>Session splicing to split traffic into multiple packets can be used to bypass IDS signatures, unless the IDS reconstructs the packets back again. To evade packet reassembly add delays to packets being submitted, to force the IDS to time out during the reassembly phase.</p>
+
+<p>Fragmentation can be leveraged</p>
+
+<p>Urgency flags?</p>
 
 <h3 id="operating-system-defences">Operating System Defences</h3>
 

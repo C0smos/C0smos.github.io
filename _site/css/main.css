@@ -361,7 +361,7 @@ code {
 
 pre {
   padding: 8px 12px;
-  overflow-x: scroll; }
+  white-space: pre-wrap; }
   pre > code {
     border: 0;
     padding-right: 0;

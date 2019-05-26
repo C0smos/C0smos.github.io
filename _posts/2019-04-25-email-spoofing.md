@@ -15,6 +15,14 @@ Various tools can be leveraged to determine the address of an internal email ser
 * Subdomain Enumeration
 * DNS TXT records
 
+It is also possible to retrieve useful information from nondelivery notification messages (NDN). Information may include the following:
+
+* Hostnames and IP address
+* Mail server software version and configuration
+* OS Identification and server configurations
+* Physical location of the mail server
+* Whether TLS is configured and supported between servers
+
 ### Email Server Configurations
 Local email servers should be configured to only accept email from the upstream security email gateway. It would be possible for attackers to send email directly to the local mail server if restrictions are not in place, allowing for security gateways to be bypassed.
 

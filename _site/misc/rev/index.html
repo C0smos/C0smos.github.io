@@ -59,6 +59,51 @@
   <article class="post-content">
     <h2 id="core">Core</h2>
 
+<h3 id="cyber-kill-chain">Cyber Kill Chain</h3>
+<ol>
+  <li>Reconnaissance</li>
+  <li>Weaponisation</li>
+  <li>Delivery</li>
+  <li>Exploitation</li>
+  <li>Installation</li>
+  <li>Command and Control (C2)</li>
+  <li>Actions on Objectives</li>
+</ol>
+
+<h3 id="tunnelling-protocols">Tunnelling Protocols</h3>
+<p>Maxium Transmission Unit for the following protocols:</p>
+
+<ul>
+  <li>PPpoE -&gt; 1492</li>
+  <li>PPoA -&gt; 1500</li>
+</ul>
+
+<h3 id="ipv6">IPv6</h3>
+<p>16 Bytes addressing (128 bits)
+The following are Scope IDs for IPv6:</p>
+
+<p>1 - Interface Local
+2 - Link Local Scope
+3 - Realm Local Scope
+4 - Admin Local Scope
+5 - Site-Local Scope
+8 - Org Local Scope
+E - Global Scope</p>
+
+<p>Node Local scopes are the following:</p>
+
+<p>FF01:0:0:0:0:0:0:1 - All Nodes Address</p>
+
+<p>FF01:0:0:0:0:0:0:2 - All Routers Address</p>
+
+<p>FF01:0:0:0:0:0:0:FB - mDNSv6</p>
+
+<ul>
+  <li>Routing Prefix is the first 3 16 bit numbers</li>
+  <li>Subnet ID is the next 16 bit number</li>
+  <li>Identifier ID is the remaining 4 16 bit numbers</li>
+</ul>
+
 <h3 id="network-access-control">Network Access Control</h3>
 <p>NACs need to detec whether new devices connect to the network, and whether they comply with a defined security policy.</p>
 
@@ -66,11 +111,41 @@
 
 <ul>
   <li>Mac Addresses (48 bits - first 6 digits (24 bits) are the manufacturer, the rightmost digits (24 bits), is the identification of the specific device)</li>
-  <li></li>
 </ul>
 
-<h3 id="wpa2-enterprise-misconfigurations">WPA2 Enterprise Misconfigurations</h3>
+<h3 id="physical-security">Physical Security</h3>
+
+<h4 id="access-control-doors">Access Control Doors</h4>
+<p>RFID Frequency HID cards:</p>
+
+<ul>
+  <li>125KHz - Low frequency RFID badge systems</li>
+  <li>13.56MHz - High frequency RFID reader (NFC)</li>
+  <li>868MHz - UHF</li>
+</ul>
+
+<h3 id="wireless-networks">Wireless Networks</h3>
+<h4 id="wpa2-enterprise-misconfigurations">WPA2 Enterprise Misconfigurations</h4>
 <p>WPA-802.1X uses a supplicant, an authenticator and an authentication server - relies on EAP to transfer messages between the supplicant and authentication server, allowing for packet encapsulation. To capture client credentials a rogue RADIUS server is required and an access point. A valid certicate may also be required if clients are configured to check for valid certificates. Once a fake access point and rogue RADIUS server is configured, clients connected to the actual target network will need to connect to the fake network. In order to achieve this de-authentication packets are sent to these clients in order to force them to reconnect to the fake network and capture the challenge-response to perform offline dictionary based attacks.</p>
+
+<h4 id="wpa2-tkip-and-wpa2-ccmp">WPA2 TKIP and WPA2 CCMP</h4>
+<p>CCMP (AES) encryption has replaced TKIP encryption, WPA2 networks must use CCMP by default. TKIP is used to perform integrity checking.</p>
+
+<h3 id="windows-internal-version-numbers">Windows Internal Version Numbers</h3>
+<ul>
+  <li>Windows 2000 -&gt; 5.0</li>
+  <li>Windows XP -&gt; 5.1</li>
+  <li>Windows Server 2003 -&gt; 5.2</li>
+  <li>Windows Server 2003 R2 -&gt; 5.2</li>
+  <li>Windows Vista -&gt; 6.0</li>
+  <li>Windows Server 2008 -&gt; 6.0 (SP 1)</li>
+  <li>Windwows 7 -&gt; 6.1</li>
+  <li>Windows Server 2008 R2 -&gt; 6.1</li>
+  <li>Windows 8 -&gt; 6.2</li>
+  <li>Windows Server 2012 -&gt; 6.2</li>
+  <li>Windows 8.1 -&gt; 6.3</li>
+  <li>Windows Server 2012 R2 -&gt; 6.2</li>
+</ul>
 
 <h3 id="whois-record-formats">WHOIS Record Formats</h3>
 <ul>
@@ -91,6 +166,144 @@
 set type=any
 ls -d example.com
 </code></pre></div></div>
+
+<h3 id="network-mapping-and-target-identification">Network Mapping and Target Identification</h3>
+
+<h3 id="filter-avoidance">Filter Avoidance</h3>
+<p>Filtering for instance on border routers is important to ensure that infrastructure remains secure, for instance from worms or other malicious code sitting on the internet. Additionally denial of service attacks could occur from computers which have been compromised.</p>
+
+<h4 id="egress">Egress</h4>
+<p>Packets leaving a network
+Spoofed source addresses or 
+Prevent data leakage
+Proxy servers to filter traffic first -&gt; Application layer proxies</p>
+
+<h4 id="ingress">Ingress</h4>
+<p>Packets coming into a network, to prevent malicicious attacks</p>
+
+<h3 id="windows-enumeration">Windows Enumeration</h3>
+<h4 id="patch-levels">Patch Levels</h4>
+<p><em>powershell.exe Get-HotFix</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Source  Description      HotFixID   InstalleBy          InstalledOn
+Host    Security Update  KB325645   NT AUTHORITY\SYSTEM 01/05/2019 00:00:00
+</code></pre></div></div>
+<h3 id="remote-vulnerability-assessments">Remote Vulnerability Assessments</h3>
+<p>SMB credential patch scanning - query the registry hive for installed software versions</p>
+
+<h4 id="locally-stored-clear-text-passwords">Locally Stored Clear Text Passwords</h4>
+<p>Cached passwords and WDigest - LSA memory</p>
+
+<h3 id="unix-and-linux">Unix and Linux</h3>
+<h4 id="patch-levels-1">Patch Levels</h4>
+<p>Linux - rpm -qa
+Unix - patchadd -p or showrev -p</p>
+
+<h3 id="directory-services">Directory Services</h3>
+
+<h4 id="windows-dns">Windows DNS</h4>
+<p>Microsoft DNS server implementation</p>
+
+<h4 id="unix-dns">Unix DNS</h4>
+<p>BIND Implementation
+named.conf.options to create a trusted ACL block which defines which hosts can perform recursive DNS queries.
+named.conf.options has an options block:</p>
+
+<ul>
+  <li>recursion</li>
+  <li>allow-recursion { trusted_block_name; };</li>
+  <li>listen-on {};</li>
+  <li>allow-transfer { none; };</li>
+  <li>forwarders { 8.8.8.8; 4.4.4.4; };</li>
+</ul>
+
+<p>named.conf.local defines the forward and reverse lookup zones</p>
+
+<p>zone files can then be created which may contain SOA records, NS and A records. Reverse Zone files are also possible to define DNS PTR records for reverse DNS lookup queries.</p>
+
+<h3 id="vpn-technologies">VPN Technologies</h3>
+<p>VPN protocols:</p>
+<ul>
+  <li>PPTP
+    <ul>
+      <li>Vulnerable to bruteforce attacks, as it relies on MS-CHAP. MS-CHAP is considered weak, it is also used as a main authentication mechanism for PEAP.</li>
+    </ul>
+  </li>
+  <li>IPSEC</li>
+  <li>L2TP</li>
+  <li>OpenVPN</li>
+  <li>TLS</li>
+</ul>
+
+<h4 id="windows">Windows</h4>
+
+<h4 id="unix">Unix</h4>
+
+<h3 id="web-and-social-enumeration">Web and Social Enumeration</h3>
+<p>Legal implications surrounding the “scraping” downloading of social media content and performing data exfiltration can occur when prior written from the site owner is not aquired. Additionally legal issues may arise if the terms of service for the site has been breached.</p>
+
+<h4 id="google-dorking">Google Dorking</h4>
+<p>Google can be quried in a specific way using operators to return useful information when conducting engagements. A breakdown of the syntax is shown below:</p>
+
+<ul>
+  <li>intitle - looks for text in html title</li>
+  <li>inurl - looks for text in the URL</li>
+  <li>filetype - Looks for particular filetypes</li>
+  <li>ext - Looks for file extensions</li>
+  <li>intext - Looks for content on a page</li>
+  <li>site - specifies to only search on that specicif site</li>
+</ul>
+
+<h4 id="shodan-queries">Shodan Queries</h4>
+
+<h3 id="enumeration-of-users">Enumeration of Users</h3>
+
+<h4 id="snmp">SNMP</h4>
+<p>It is possible to enumerate usernames from the SNMP protocol, with the correct public string. LanManager OID values are used to enumerate Windows hosts, where the psProcessUsername OID value is used for Unix hosts.</p>
+
+<h4 id="sip">SIP</h4>
+<p>The SIP protocol can be used to enumerate usernames using particular requests such as registration requests. The following methods can be used:</p>
+
+<ul>
+  <li>REGISTER</li>
+  <li>OPTIONS</li>
+</ul>
+
+<p>The following response codes are used to determine whether a username is valid or not:</p>
+
+<ul>
+  <li>401 or 407 - extension is valid, however authentication is required</li>
+  <li>200 - extension is valid and no authentication is required</li>
+</ul>
+
+<p>SIP Methods are listed below:</p>
+
+<ul>
+  <li>INVITE - Used to establish a session</li>
+  <li>ACK - Provides confirmation of an INVITE request</li>
+  <li>BYE - Closes the SIP session</li>
+  <li>CANCEL - Cancels a SIP session which is being established</li>
+  <li>REGISTER - Validates user location</li>
+  <li>OPTIONS - Provides information on the supported methods of the SIP service</li>
+  <li>PRACK - Provisional acknowledgement</li>
+  <li>SUBSCRIBE - Notification subscription</li>
+  <li>NOTIFY - Any new event occur, tells the subscriber</li>
+  <li>PUBLISH - Publishes event to the server</li>
+  <li>INFO - Mid session information</li>
+  <li>REFER - Alerts recipient to perform a call transfer</li>
+  <li>MESSAGE - Instant message transfers</li>
+  <li>UPDATE - Session state modifier</li>
+</ul>
+
+<h3 id="ldap-queries">LDAP Queries</h3>
+<p>AD DirectoryEntry
+Enumerate all users</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>objectClass "(objectClass=user)"
+</code></pre></div></div>
+
+<h3 id="ad-services">AD Services</h3>
+<p>External AD services can be leverage to perform user enumeration based on timing attacks, Exchange is particular popular for this.</p>
+
 <h2 id="client-side-exploitation">Client-Side Exploitation</h2>
 
 <h3 id="common-document-formats">Common Document Formats</h3>
@@ -177,15 +390,37 @@ _VBA_PROJECT steam contains the VBA engine which will run the macro</p>
 
 <h3 id="ms-operating-system-vulnerabilities">MS Operating System Vulnerabilities</h3>
 
+<h4 id="hta-files">HTA Files</h4>
+<p>Internet Explorer 5+, legitimate MS application</p>
+
 <h3 id="xss-vectors-for-intercepting-keystrokes-and-mouse-clicks">XSS Vectors for Intercepting Keystrokes and Mouse Clicks</h3>
+<p>JavaScript to hook a browser:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">hook()</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">"m"</span> <span class="na">src=</span><span class="s">"https://www.wesrenshaw.com/test.js"</span> <span class="na">width=</span><span class="s">0px</span> <span class="na">height=</span><span class="s">0px</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">function</span> <span class="nx">hook</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"m"</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">"https://www.wesrenshaw.com"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
 
 <h2 id="embedded-and-peripheral-devices">Embedded and Peripheral Devices</h2>
 
-<h3 id="identification-and-ezploitation-of-embedded-devices">Identification and Ezploitation of Embedded Devices</h3>
+<h3 id="identification-and-exploitation-of-embedded-devices">Identification and Exploitation of Embedded Devices</h3>
 
 <h3 id="identification-and-remote-control-of-peripheral-devices">Identification and Remote Control of Peripheral Devices</h3>
 
 <h3 id="key-logging">Key Logging</h3>
+<h4 id="windows-1">Windows</h4>
+<p>In order to capture keystrokes on a Windows host, it is usually most common to inject into the explorer.exe process, if credential captures for the actual Windows login is desired them hooking winlogon.exe should be done.</p>
+
+<p>Windows global hooks can be used to capture mouse clicks, which is possible using .NET and listening for MouseEventArgs.</p>
 
 <h2 id="implant-creation">Implant Creation</h2>
 
@@ -239,8 +474,18 @@ _VBA_PROJECT steam contains the VBA engine which will run the macro</p>
 <h3 id="operating-system-defences">Operating System Defences</h3>
 
 <h3 id="perimeter-controls">Perimeter Controls</h3>
+<h4 id="http-proxy-bypasses">HTTP Proxy Bypasses</h4>
+<p>The following .NET code can be used to create a proxy connections with domain authentication credentials of a compromised host:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Proxy</span><span class="p">.</span><span class="n">Credentials</span> <span class="p">=</span> <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">CredentialCache</span><span class="p">]</span>
+<span class="c1">// Use current credentials</span>
+<span class="n">Outbound</span><span class="p">.</span><span class="n">Proxy</span><span class="p">.</span><span class="n">Credentials</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">CredentialCache</span><span class="p">.</span><span class="n">DefaultCredential</span>
+</code></pre></div></div>
+
+<h4 id="smtp-proxy-filtering">SMTP Proxy Filtering</h4>
 
 <h3 id="ids-evasion">IDS Evasion</h3>
+<p>Methods can be applied at layer 3 (Network) and 4 (Transport) to evade IDS systems, such as data insertion which is XREF. Packet fragmentation can also be used, whereby the IDS system may disregard the packets, however these packets are then reassembled later on. Packet data can also be modified for instance by manipulating flags or appending data. Port scanning can be masked using Nmap’s –data-length and –data-string.</p>
 
 <h2 id="egress-and-c2-communications">Egress and C2 Communications</h2>
 

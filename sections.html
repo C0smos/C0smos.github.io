@@ -63,4 +63,11 @@ title: Sections
 		{% endfor %}
 	</div>
 
+	<div id="section-list">
+	  <h3>Privilege Escalation</h3>
+		{% for post in site.categories.PrivilegeEscalation %}
+		 <li><span>{{ date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
+		{% endfor %}
+	</div>
+
 </div>

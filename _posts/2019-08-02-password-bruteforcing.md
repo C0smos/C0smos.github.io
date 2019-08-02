@@ -1,5 +1,5 @@
 ---
-date: 2019-04-24
+date: 2019-08-02
 title: Initial Foothold Through Outlook Password Bruteforcing
 description: Notes for password bruteforcing
 categories: InitialCompromise

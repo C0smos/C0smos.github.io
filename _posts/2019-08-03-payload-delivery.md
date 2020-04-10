@@ -160,7 +160,7 @@ New form of dotnet2jscript called Gadget2Jscript created by [Mohamed El Azaar](h
 
 Steve Borosh created the gist below to perform process injection, parent-PID spoofing and blocking of non-signed Microsoft DLLs:
 
-[https://gist.githubusercontent.com/rvrsh3ll/1e66f0f2c7103ff8709e5fd63ca346ac/raw/2f994fc619b23fe9fb021903e01a204f267fd670/blockdlls_gadget2jscript.cs](https://gist.githubusercontent.com/rvrsh3ll/1e66f0f2c7103ff8709e5fd63ca346ac/raw/2f994fc619b23fe9fb021903e01a204f267fd670/blockdlls_gadget2jscript.cs "https://gist.githubusercontent.com/rvrsh3ll/1e66f0f2c7103ff8709e5fd63ca346ac/raw/2f994fc619b23fe9fb021903e01a204f267fd670/blockdlls_gadget2jscript.cs")
+[https://gist.githubusercontent.com/rvrsh3ll](https://gist.githubusercontent.com/rvrsh3ll/1e66f0f2c7103ff8709e5fd63ca346ac/raw/2f994fc619b23fe9fb021903e01a204f267fd670/blockdlls_gadget2jscript.cs)
 
 RastaMouse created a fork of Gadget2Script to be more operator friendly:
 

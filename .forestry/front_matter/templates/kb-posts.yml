@@ -15,4 +15,4 @@ fields:
   name: categories
   label: categories
 pages:
-- _posts/active-directory-enumeration-and-exploitation.md
+- _posts/2020-04-09-active-directory-enumeration-and-exploitation.md

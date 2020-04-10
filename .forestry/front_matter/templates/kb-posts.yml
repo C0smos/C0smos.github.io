@@ -1,0 +1,16 @@
+---
+label: KB Posts
+hide_body: false
+fields:
+- type: datetime
+  name: date
+  label: date
+- type: text
+  name: title
+  label: title
+- type: text
+  name: description
+  label: description
+- type: text
+  name: categories
+  label: categories

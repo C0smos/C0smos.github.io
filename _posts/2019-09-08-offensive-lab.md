@@ -17,10 +17,10 @@ The lab runs on an Intel NUC Hades Canyon with 1TB M2 SSD storage and 64GB RAM. 
 * OpenVPN server
 * XREF
 
-The lab consists of a DMZ, workstation and server networks, that are segregated by a PFSense firewall.
+The lab consists of a DMZ, client and server networks, that are segregated by a PFSense firewall.
 
-The AD environment includes two Forests which has one parent and one child domain. The following blog post was used as a reference, and is super helpful to quickly standup a useful AD for practicing attacks:
+The AD environment includes two Forests (bank and dev) which has one parent and one child domain. The following blog post was used as a reference, and is super helpful to quickly standup a useful AD for practicing attacks:
 
 XREF
 
-The DMZ has a Proxmox security mail gateway.
+The DMZ has a Proxmox security mail gateway. A Cisco switch is used to connect the "attacker box" to the DMZ. In order to get access into the client bank VLAN, a phishing payload has to be delivered which will be executed by a "simulated user" (Python script etc), providing a foothold into the environment.

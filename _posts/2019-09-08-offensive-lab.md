@@ -13,11 +13,12 @@ The lab runs on an Intel NUC Hades Canyon with 1TB M2 SSD storage and 64GB RAM. 
 
 * Exchange Server 2016
 * Windows Server 2016 x 2
-* Squid Proxy
+* Squid Proxy (HTTPS outbound only), no categorisation atm)
 * OpenVPN server
 * WSUS Server
 * Windows 10 clients
 * Debian client
+* XREF
 
 The lab consists of a DMZ, client and server networks, that are segregated by a PFSense firewall.
 

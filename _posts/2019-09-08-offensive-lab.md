@@ -1,5 +1,5 @@
 ---
-date: 2019-09-08
+date: 2020-11-14 00:00:00 +0000
 title: Offensive Lab Infrastructure
 description: Notes on building offensive labs using AutomatedLab
 categories: inf
